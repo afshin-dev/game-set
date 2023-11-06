@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <>
       <HStack>
-        <Image src={logo} boxSize="60px" bgColor={"black"}></Image>
+        <Image src={logo} boxSize="40px" bgColor={"black"}></Image>
         <Text fontWeight="bold" fontFamily="monospace">
           Gem Set
         </Text>
