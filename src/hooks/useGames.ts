@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/rawg-api-client";
 import type Game from "../schemas/game.schema";
+import Genre from "../schemas/genre.schema";
 
 type GamesResponse = {
   results: Game[];
@@ -8,16 +9,31 @@ type GamesResponse = {
   next?: string;
   previous?: string;
 };
-
-const useGames = (): { games: Game[]; error: string; loading: Boolean } => {
+interface Args {
+  genre: Genre | null;
+}
+const useGames = (
+  args: Args
+): { games: Game[]; error: string; loading: Boolean } => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<Boolean>(false);
 
   useEffect(() => {
+    let params: { [k: string]: string } = {};
     setLoading(true);
+
+    // for filtering based on genres
+    if (args.genre) {
+      params = {
+        genres: args.genre.slug,
+      };
+    }
+
     api
-      .get<GamesResponse>("/games")
+      .get<GamesResponse>("/games", {
+        params: params,
+      })
       .then((res) => {
         setGames(res.data.results);
 
@@ -28,7 +44,7 @@ const useGames = (): { games: Game[]; error: string; loading: Boolean } => {
 
         setLoading(false);
       });
-  }, []);
+  }, [args.genre]);
 
   return {
     games: games,
