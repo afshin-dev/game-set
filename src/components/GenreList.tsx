@@ -5,14 +5,15 @@ import {
   List,
   ListItem,
   Spinner,
-  Text,
 } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenre";
 import Genre from "../schemas/genre.schema";
+
 interface Props {
   onSelectGenre: (g: Genre) => void;
+  selectedGenre: Genre | null;
 }
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { genres, loading } = useGenres();
 
   if (loading) {
@@ -33,6 +34,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
                 ></Image>
                 <Button
                   variant={"link"}
+                  fontWeight={selectedGenre?.id === g.id ? "bold" : "normal"}
                   onClick={() => onSelectGenre({ ...g })}
                 >
                   {g.name}
