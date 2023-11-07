@@ -38,6 +38,9 @@ type Game = {
   esrb_rating?: { id: number; slug: ESRBRatingSlug; name: ESRBRatingName };
   platforms: Platforms;
   parent_platforms: { platform: Platform }[];
+  parent_platforms_to_platform_array?: (
+    pp: { platform: Platform }[]
+  ) => Platform[];
 };
 
 export default Game;
