@@ -1,3 +1,4 @@
+import Platform from "./platform.schema";
 import type Platforms from "./platforms.schema";
 enum ESRBRatingSlug {
   Everyone = "everyone",
@@ -36,6 +37,7 @@ type Game = {
   updated?: Date;
   esrb_rating?: { id: number; slug: ESRBRatingSlug; name: ESRBRatingName };
   platforms: Platforms;
+  parent_platforms: { platform: Platform }[];
 };
 
 export default Game;
