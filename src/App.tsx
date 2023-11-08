@@ -6,12 +6,15 @@ import { useState } from "react";
 import Genre from "./schemas/genre.schema";
 import PlatformSelector from "./components/PlatformSelector";
 import Platform from "./schemas/platform.schema";
+import { SortSelector } from "./components/SortSelector";
+import Order from "./schemas/order.enum";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
     null
   );
+  const [order, setOrder] = useState<Order | null>(null);
 
   const resetState = () => {
     setSelectedGenre(null);
@@ -43,9 +46,11 @@ function App() {
             onSelectPlatform={setSelectedPlatform}
             selectedPlatform={selectedPlatform}
           ></PlatformSelector>
+          <SortSelector order={order} onChangeOrder={setOrder}></SortSelector>
           <GameGrid
             platform={selectedPlatform}
             genre={selectedGenre}
+            order={order}
           ></GameGrid>
         </GridItem>
       </Grid>
