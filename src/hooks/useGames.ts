@@ -11,10 +11,12 @@ type GamesResponse = {
   next?: string;
   previous?: string;
 };
+
 interface Args {
   genre: Genre | null;
   platform: Platform | null;
   order: Order | null;
+  search: string;
 }
 
 const useGames = (
@@ -43,6 +45,11 @@ const useGames = (
       params.ordering = args.order;
     }
 
+    // for searching
+    if (args.search) {
+      params.search = args.search;
+    }
+
     api
       .get<GamesResponse>("/games", {
         params: params,
@@ -57,7 +64,7 @@ const useGames = (
 
         setLoading(false);
       });
-  }, [args.genre, args.platform, args.order]);
+  }, [args.genre, args.platform, args.order, args.search]);
 
   return {
     games: games,
