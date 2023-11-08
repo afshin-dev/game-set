@@ -30,7 +30,7 @@ const GameGrid = (p: Props) => {
         })}
         {loading &&
           [1, 2, 3, 4, 5, 6, 7, 8].map((n) => {
-            return <GameCardSkeleton></GameCardSkeleton>;
+            return <GameCardSkeleton key={`${n}`}></GameCardSkeleton>;
           })}
       </SimpleGrid>
     </>
