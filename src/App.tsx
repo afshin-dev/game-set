@@ -19,6 +19,7 @@ function App() {
   const resetState = () => {
     setSelectedGenre(null);
     setSelectedPlatform(null);
+    setOrder(null);
   };
 
   return (
