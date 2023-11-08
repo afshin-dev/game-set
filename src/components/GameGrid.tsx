@@ -10,6 +10,7 @@ interface Props {
   genre: Genre | null;
   platform: Platform | null;
   order: Order | null;
+  search: string;
 }
 
 const GameGrid = (p: Props) => {
@@ -17,6 +18,7 @@ const GameGrid = (p: Props) => {
     genre: p.genre,
     platform: p.platform,
     order: p.order,
+    search: p.search,
   });
 
   return (
