@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/rawg-api-client";
 import type Game from "../schemas/game.schema";
 import Genre from "../schemas/genre.schema";
+import Platform from "../schemas/platform.schema";
 
 type GamesResponse = {
   results: Game[];
@@ -11,7 +12,9 @@ type GamesResponse = {
 };
 interface Args {
   genre: Genre | null;
+  platform: Platform | null;
 }
+
 const useGames = (
   args: Args
 ): { games: Game[]; error: string; loading: Boolean } => {
@@ -25,9 +28,12 @@ const useGames = (
 
     // for filtering based on genres
     if (args.genre) {
-      params = {
-        genres: args.genre.slug,
-      };
+      params.genres = args.genre.slug;
+    }
+
+    // for filtering based on platforms
+    if (args.platform) {
+      params.platforms = args.platform.id.toString();
     }
 
     api
@@ -44,7 +50,7 @@ const useGames = (
 
         setLoading(false);
       });
-  }, [args.genre]);
+  }, [args.genre, args.platform]);
 
   return {
     games: games,
