@@ -3,7 +3,7 @@ import type Game from "../schemas/game.schema";
 import PlatformIconList from "./PlatformIconList";
 import Platform from "../schemas/platform.schema";
 import CriticScore from "./CriticScore";
-
+import noimage from "../assets/No-Image-Placeholder.svg.png";
 interface Props {
   game: Game;
   children?: React.ReactNode;
@@ -20,7 +20,11 @@ const GameCard = ({ game }: Props) => {
   return (
     <>
       <Card borderRadius={10} overflow={"hidden"}>
-        <Image src={game.background_image}></Image>
+        {game.background_image ? (
+          <Image src={game.background_image}></Image>
+        ) : (
+          <Image src={noimage}></Image>
+        )}
         <CardBody>
           <HStack justifyContent={"space-between"}>
             <PlatformIconList
