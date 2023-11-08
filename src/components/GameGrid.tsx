@@ -4,16 +4,19 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import Genre from "../schemas/genre.schema";
 import Platform from "../schemas/platform.schema";
+import Order from "../schemas/order.enum";
 
 interface Props {
   genre: Genre | null;
   platform: Platform | null;
+  order: Order | null;
 }
 
 const GameGrid = (p: Props) => {
   const { error, games, loading } = useGames({
     genre: p.genre,
     platform: p.platform,
+    order: p.order,
   });
 
   return (
