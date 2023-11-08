@@ -1,8 +1,13 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/react.svg";
 import ColorModeSwitch from "./ColorModeSwitch";
+import Search from "./Search";
 
-export default function NavBar() {
+interface Props {
+  onSearch: (k: string) => void;
+  searchPhrase: string;
+}
+export default function NavBar(p: Props) {
   return (
     <>
       <HStack justifyContent={"space-between"} padding={1}>
@@ -12,9 +17,7 @@ export default function NavBar() {
           bgColor={"transparent"}
           borderRadius={20}
         ></Image>
-        <Text fontWeight="bold" fontFamily="monospace">
-          Gem Set
-        </Text>
+        <Search onSearch={p.onSearch} searchPhrase={p.searchPhrase}></Search>
         <ColorModeSwitch></ColorModeSwitch>
       </HStack>
     </>
