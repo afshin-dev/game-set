@@ -3,6 +3,7 @@ import api from "../services/rawg-api-client";
 import type Game from "../schemas/game.schema";
 import Genre from "../schemas/genre.schema";
 import Platform from "../schemas/platform.schema";
+import Order from "../schemas/order.enum";
 
 type GamesResponse = {
   results: Game[];
@@ -13,6 +14,7 @@ type GamesResponse = {
 interface Args {
   genre: Genre | null;
   platform: Platform | null;
+  order: Order | null;
 }
 
 const useGames = (
@@ -36,6 +38,11 @@ const useGames = (
       params.platforms = args.platform.id.toString();
     }
 
+    // for set ordering games
+    if (args.order) {
+      params.ordering = args.order;
+    }
+
     api
       .get<GamesResponse>("/games", {
         params: params,
@@ -50,7 +57,7 @@ const useGames = (
 
         setLoading(false);
       });
-  }, [args.genre, args.platform]);
+  }, [args.genre, args.platform, args.order]);
 
   return {
     games: games,
