@@ -5,8 +5,13 @@ import ColorModeSwitch from "./ColorModeSwitch";
 export default function NavBar() {
   return (
     <>
-      <HStack>
-        <Image src={logo} boxSize="40px" bgColor={"black"}></Image>
+      <HStack justifyContent={"space-between"} padding={1}>
+        <Image
+          src={logo}
+          boxSize="40px"
+          bgColor={"transparent"}
+          borderRadius={20}
+        ></Image>
         <Text fontWeight="bold" fontFamily="monospace">
           Gem Set
         </Text>
