@@ -8,6 +8,16 @@ import PlatformSelector from "./components/PlatformSelector";
 import Platform from "./schemas/platform.schema";
 import { SortSelector } from "./components/SortSelector";
 import Order from "./schemas/order.enum";
+import Tags from "./components/Tags";
+
+// exp-tanstack
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+const queryClient = new QueryClient({});
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -58,6 +68,11 @@ function App() {
           ></GameGrid>
         </GridItem>
       </Grid>
+      {/* tags working with tanstack react query */}
+      <QueryClientProvider client={queryClient}>
+        <Tags></Tags>
+        <ReactQueryDevtools></ReactQueryDevtools>
+      </QueryClientProvider>
     </>
   );
 }
